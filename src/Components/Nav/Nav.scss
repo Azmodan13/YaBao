@@ -1,0 +1,40 @@
+.nav {
+    margin-bottom: 25px;
+    &__btn__login {
+        cursor: pointer;
+        text-decoration: none;
+        color: #0e0c0d;
+        &:hover {
+            color: #ff2e65;
+            text-decoration: underline;
+        }
+    }
+    &__btn__wrapper {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__list {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        padding: 0;
+        li {
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 18px;
+            color: #0e0c0d;
+            cursor: pointer;
+            &:hover {
+                color: #ff2e65;
+                text-decoration: underline;
+            }
+        }
+    }
+}

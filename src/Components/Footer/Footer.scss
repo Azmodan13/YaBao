@@ -1,0 +1,95 @@
+.footer {
+    display: flex;
+    padding: 60px;
+
+    &__tel {
+        margin-bottom: 20px;
+    }
+    &__btn {
+        font-size: 13px;
+        width: 180px;
+    }
+
+    svg {
+        margin-bottom: 40px;
+    }
+    &__img {
+        position: absolute;
+        right: 70px;
+        bottom: 0;
+        z-index: -1;
+    }
+    &__left {
+        width: 50%;
+        &__title {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 50px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 28px;
+            color: #0e0c0d;
+        }
+        &__social {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 28px;
+            color: #0e0c0d;
+            opacity: 0.7;
+            margin-bottom: 45px;
+        }
+        p {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 28px;
+            color: #0e0c0d;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    }
+    &__right {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        p {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+            text-transform: uppercase;
+            color: #0e0c0d;
+            margin-bottom: 35px;
+        }
+        &__messengers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        &__messenger {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 50px;
+            border: 2px solid #e3ecf5;
+            border-radius: 13px;
+            transition: all 0.3s;
+            cursor: pointer;
+            &:hover {
+                border: solid 2px #ff2e65;
+                transform: scale(1.05);
+            }
+
+            &__big {
+                width: 215px;
+            }
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+}
