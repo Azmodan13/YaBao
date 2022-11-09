@@ -1,7 +1,8 @@
 import Home from "./Pages/Home";
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
-import {fetchProduct} from './Redux/slice/productSlice'
+import {fetchProduct} from './Redux/data/productSlice'
+import {fetchStock} from './Redux/data/stockSlice'
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchProduct());
+    dispatch(fetchStock());
   }, [dispatch]);
 
   return (
