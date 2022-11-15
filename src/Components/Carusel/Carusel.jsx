@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Slider from 'react-slick'
-import './Carousel.scss'
-import bannerOne from '../../assets/img/bannerOne.png'
-import bannerTwo from '../../assets/img/bannerTwo.png'
-import bannerThree from '../../assets/img/bannerThree.png'
+import './Carusel.scss'
+import bannerOne from '../../Assets/img/bannerOne.png'
+import bannerTwo from '../../Assets/img/bannerTwo.png'
+import bannerThree from '../../Assets/img/bannerThree.png'
 
 const images = [bannerOne, bannerTwo, bannerThree]
 

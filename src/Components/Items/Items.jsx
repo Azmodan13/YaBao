@@ -1,11 +1,10 @@
-import './Item.scss'
+import './Items.scss'
 
 export default function Item({ data, title, id }) {
     return (
         <section className="item__wrapper">
             <p className="title" id={id}>
-                {' '}
-                {title}{' '}
+                {title}
             </p>
             <div className="items">
                 {data
