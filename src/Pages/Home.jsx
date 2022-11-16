@@ -1,18 +1,17 @@
-import Header from '../Components/Header/Header'
 import Nav from '../Components/Nav/Nav'
-import Footer from '../Components/Footer/Footer'
 import New from '../Components/New/New'
 import Item from '../Components/Items/Items'
 import Stocks from '../Components/Stocks/Stocks'
 import Carusel from '../Components/Carusel/Carusel'
-import { useSelector } from 'react-redux'
+import PayAndDelivery from '../Components/PayAndDelivery/PayAndDelivery'
+import {useSelector} from 'react-redux'
+
 
 export default function Home() {
     const product = useSelector((state) => state.menu.menu[0])
-
+    console.log(product)
     return (
         <div className="container">
-            <Header />
             <Nav />
             <Carusel />
             {product ? (
@@ -28,7 +27,7 @@ export default function Home() {
                 <div> Loading...</div>
             )}
             <Stocks />
-            <Footer />
+            <PayAndDelivery/>
         </div>
     )
 }

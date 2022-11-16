@@ -6,6 +6,7 @@ import massager from '../../Assets/ico/social/massager.png'
 import skype from '../../Assets/ico/social/skype.png'
 import telegram from '../../Assets/ico/social/telegram.png'
 import viber from '../../Assets/ico/social/viber.png'
+import {Link} from 'react-router-dom'
 
 export default function Footer() {
     return (
@@ -14,6 +15,7 @@ export default function Footer() {
                 <div id="contact" className="footer">
                     <img className="footer__img" src={footerImg} alt="footerImg" />
                     <div className="footer__left">
+                        <Link to="/">
                         <svg
                             width="208"
                             height="64"
@@ -59,6 +61,7 @@ export default function Footer() {
                                 fill="#FF2E65"
                             />
                         </svg>
+                        </Link>
                         <div className="footer__left__title">
                             <p>Калорійність та склад</p>
                             <p>Правова інформація</p>
@@ -76,27 +79,21 @@ export default function Footer() {
                         <p>Залишились питання? А ми завжди на зв'язку: </p>
                         <div className="footer__right__messengers">
                             <div className="footer__right__messenger">
-                                {' '}
                                 <img src={viber} alt="" />
                             </div>
                             <div className="footer__right__messenger">
-                                {' '}
                                 <img src={skype} alt="" />
                             </div>
                             <div className="footer__right__messenger">
-                                {' '}
                                 <img src={massager} alt="" />
                             </div>
                             <div className="footer__right__messenger">
-                                {' '}
                                 <img src={telegram} alt="" />
                             </div>
                             <div className="footer__right__messenger">
-                                {' '}
                                 <img src={Facebook} alt="" />
                             </div>
                             <div className="footer__right__messenger">
-                                {' '}
                                 <img src={LinkedIn} alt="" />
                             </div>
                             <div className="footer__right__messenger footer__right__messenger__big">Написати нам</div>

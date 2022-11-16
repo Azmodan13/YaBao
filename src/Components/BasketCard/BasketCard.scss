@@ -1,0 +1,111 @@
+.basket{
+&__container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+}
+&__title{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #FF2E65;
+    margin-bottom: 33px;
+}
+&__list{
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+    &__info{
+        display: flex;
+        flex-direction: column;
+        width: 410px;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 19px;
+        color: #686466;
+        margin-right: 25px;
+        &__title{
+            font-weight: 700;
+            font-size: 19px;
+            line-height: 17px;
+            color: #0E0C0D;
+            margin-bottom: 10px;
+        }
+    }
+    &__price{
+        width: 40px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        text-align: center;
+        color: #FF2E65;
+        margin-right: 25px;
+    }
+    &__counter{
+        width: 95px;
+        height: 35px;
+        background: #F3F3F7;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        color: #686466;
+        margin-right: 40px;
+        span{
+            cursor: pointer;
+            &:hover{
+                color: #FF2E65;
+            }
+        }
+    }
+    &__remove{
+        svg{
+            fill: #686466;
+            cursor: pointer;
+            &:hover{
+                fill: #FF2E65;
+            }
+        }
+    }
+}
+&__item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    img{
+        max-width: 70px;
+        margin-right: 25px;
+    }
+}
+    &__footer{
+        display: flex;
+        justify-content: space-between;
+        &__sum{
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 17px;
+            color: #0E0C0D;
+            span{
+                margin-left: 10px;
+                font-size: 36px;
+                line-height: 44px;
+                color: #FF2E65;
+            }
+        }
+        &__promo{
+            width: 50%;
+
+        }
+    }
+}
+
+.err{
+    width:400px;
+    margin: 0 auto;
+    img{
+        width: 100%;
+    }
+}

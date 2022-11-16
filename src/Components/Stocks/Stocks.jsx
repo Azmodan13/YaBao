@@ -1,5 +1,6 @@
 import './Stocks.scss'
 import Btn from '../Btn/Btn'
+import {Link} from 'react-router-dom'
 export default function Stocks() {
     return (
         <div id="stocks" className="stocks">
@@ -32,7 +33,9 @@ export default function Stocks() {
                     />
                 </div>
             </div>
-            <Btn btnText="Всі акції" btnWidth={'160px'} btnHeight={'48px'} url="stock" />
+            <Link to="stock">
+            <Btn btnText="Всі акції" btnWidth={'160px'} btnHeight={'48px'} />
+            </Link>
         </div>
     )
 }

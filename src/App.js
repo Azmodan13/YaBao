@@ -1,8 +1,9 @@
-import Home from "./Pages/Home";
+import Router from './Router/Router';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {fetchProduct} from './Redux/data/productSlice'
 import {fetchStock} from './Redux/data/stockSlice'
+
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Home/>
+    <Router/>
   );
 }
 

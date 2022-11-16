@@ -1,8 +1,8 @@
 import './PayAndDelivery.scss'
-import pay from '../assets/ico/delivery/pay.png'
-import delivery from '../assets/ico/delivery/delivery.png'
-import fastDelivery from '../../../assets/ico/delivery/festdelivery.png'
-import netbook from '../assets/ico/delivery/netbook.png'
+import pay from '../../Assets/ico/delivery/pay.png'
+import delivery from '../../Assets/ico/delivery/delivery.png'
+import fastDelivery from '../../Assets/ico/delivery/festdelivery.png'
+import netbook from '../../Assets/ico/delivery/netbook.png'
 
 export default function PayAndDelivery() {
     return (
