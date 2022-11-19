@@ -1,23 +1,21 @@
 import './BasketCard.scss'
 import Btn from '../Btn/Btn'
 import BasketItem from './BasketItem/BasketItem'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function BasketCard() {
-    let cart = []
-
+    let cart = useSelector((state) => state.cart.cart)
 
     return (
         <div className="basket__container">
             <h1 className="basket__title"> Кошик</h1>
             <ul className="basket__list">
-                {cart.length ? (
+                {cart ? (
                     cart.map((item) => <BasketItem key={item.id} item={item} />)
                 ) : (
                     <div className="err">
-                        <img
-                            src="https://www.meme-arsenal.com/memes/6069d1c569579d1cc52343a19e2e3c62.jpg"
-                            alt=""
-                        />
+                        <img src="https://www.meme-arsenal.com/memes/6069d1c569579d1cc52343a19e2e3c62.jpg" alt="" />
                     </div>
                 )}
             </ul>
@@ -26,7 +24,9 @@ function BasketCard() {
                     Сумма замовлення:<span>грн</span>
                 </div>
                 <div className="basket__footer__checkout">
-                    <Btn btnText="Оформити замовлення" btnWidth="225px" btnHeight="55px" />
+                    <Link to="/checkout">
+                        <Btn btnText="Оформити замовлення" btnWidth="225px" btnHeight="55px" />
+                    </Link>
                 </div>
             </div>
         </div>

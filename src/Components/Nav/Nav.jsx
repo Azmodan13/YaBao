@@ -3,7 +3,7 @@ import Btn from '../Btn/Btn'
 import UpBtn from './UpBtn/UpBtn'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { useEffect, useState } from 'react'
-import {Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function Nav() {
     const [scroll, setScroll] = useState(0)
@@ -68,7 +68,9 @@ export default function Nav() {
                     </ul>
 
                     <div className="nav__btn__wrapper">
-                        <p className="nav__btn__login">Вхід </p>
+                        <p className="nav__btn__login">
+                            <RouterLink to="/login"> Вхід</RouterLink>
+                        </p>
                         <RouterLink to="/basket">
                             <Btn url="basket" btnText={`В кошик |`} />
                         </RouterLink>

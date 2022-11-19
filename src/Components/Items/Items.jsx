@@ -1,6 +1,10 @@
 import './Items.scss'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../Redux/slice/cartSlice'
 
 export default function Item({ data, title, id }) {
+    const dispatch = useDispatch()
+
     return (
         <section className="item__wrapper">
             <p className="title" id={id}>
@@ -16,7 +20,11 @@ export default function Item({ data, title, id }) {
                                   <p className="item__description">{item.description}</p>
                                   <div className="item__footer">
                                       <span>{item.price} грн.</span>
-                                      <button className="btn" style={{ width: '125px', height: '35px' }}>
+                                      <button
+                                          className="btn"
+                                          style={{ width: '125px', height: '35px' }}
+                                          onClick={() => dispatch(addToCart(item))}
+                                      >
                                           В кошик
                                       </button>
                                   </div>

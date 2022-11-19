@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 
 export default function Stock() {
     const dataStock = useSelector((state) => state.stock.stock[0])
-    console.log(dataStock)
 
     return (
         <div className="container">

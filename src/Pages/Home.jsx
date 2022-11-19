@@ -9,11 +9,11 @@ import {useSelector} from 'react-redux'
 
 export default function Home() {
     const product = useSelector((state) => state.menu.menu[0])
-    console.log(product)
     return (
-        <div className="container">
-            <Nav />
+        <>
+        <Nav />
             <Carusel />
+        <div className="container">
             {product ? (
                 <>
                     <New data={product.new} /> <Item title={'Піца'} data={product.pizza} id="pizza" />
@@ -26,8 +26,9 @@ export default function Home() {
             ) : (
                 <div> Loading...</div>
             )}
+        </div>
             <Stocks />
             <PayAndDelivery/>
-        </div>
+            </>
     )
 }
