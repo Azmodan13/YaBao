@@ -4,9 +4,14 @@ import UpBtn from './UpBtn/UpBtn'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import {useAuth} from '../../hooks/use-auth'
+import { useDispatch } from 'react-redux'
+
 
 export default function Nav() {
     const [scroll, setScroll] = useState(0)
+    const {isAuth, email} = useAuth();
+    const dispatch = useDispatch()
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -68,8 +73,13 @@ export default function Nav() {
                     </ul>
 
                     <div className="nav__btn__wrapper">
+                        
                         <p className="nav__btn__login">
+                            {isAuth ? 
+                            <RouterLink to="/profile">Особитий кабінет</RouterLink>
+                            :
                             <RouterLink to="/login"> Вхід</RouterLink>
+                            }
                         </p>
                         <RouterLink to="/basket">
                             <Btn url="basket" btnText={`В кошик |`} />
