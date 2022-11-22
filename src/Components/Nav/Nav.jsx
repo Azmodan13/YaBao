@@ -8,7 +8,9 @@ import {useAuth} from '../../hooks/use-auth'
 import { useDispatch } from 'react-redux'
 
 
+
 export default function Nav() {
+
     const [scroll, setScroll] = useState(0)
     const {isAuth, email} = useAuth();
     const dispatch = useDispatch()

@@ -10,13 +10,15 @@ import Profile from '../Pages/Profile'
 import OrderLists from '../Pages/OrderLists/OrderLists'
 
 export default function Router() {
+
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomeLayout />}>
                     <Route index element={<Home />} />
                     <Route path="stock" element={<Stock />} />
-                    <Route path="regestration" element={<Registration />} />{' '}
+                    <Route path="regestration" element={<Registration />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="login" element={<LogIn />} />
                 </Route>

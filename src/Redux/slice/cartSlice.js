@@ -41,15 +41,11 @@ const cartSlice = createSlice({
       state.cart = removeItem;
     },
   },
-  test : (state, action) => {
-    const cart = state.cart;
-    const tota = 0
-    cart.forEach(element => {
-      tota += element.quantity
-    });
-    state.total = tota
-
-  }
+    // logOut: (state) => {
+    //   const removeItem = null
+    //   state.cart = removeItem
+    //   console.log(state.cart)
+    // },
 });
 
 export const cartReducer = cartSlice.reducer;
@@ -58,6 +54,6 @@ export const {
   incrementQuantity,
   decrementQuantity,
   removeItem,
-  test
+  logOut
 } =
 cartSlice.actions;
