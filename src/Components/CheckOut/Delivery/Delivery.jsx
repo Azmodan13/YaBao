@@ -1,5 +1,4 @@
 import './Delivery.scss'
-import Btn from '../../Btn/Btn'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 

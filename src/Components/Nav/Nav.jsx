@@ -6,10 +6,13 @@ import { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {useAuth} from '../../hooks/use-auth'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 
 export default function Nav() {
+
+    const totalItems = useSelector((state)=> state.cart.totalItems)
 
     const [scroll, setScroll] = useState(0)
     const {isAuth, email} = useAuth();
@@ -84,7 +87,7 @@ export default function Nav() {
                             }
                         </p>
                         <RouterLink to="/basket">
-                            <Btn url="basket" btnText={`В кошик |`} />
+                            <Btn url="basket" btnText={`В кошик | ${totalItems}`} />
                         </RouterLink>
                     </div>
                 </div>

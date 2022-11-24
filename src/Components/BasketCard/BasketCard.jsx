@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 
 function BasketCard() {
     let cart = useSelector((state) => state.cart.cart)
+    let total = useSelector((state) => state.cart.totalPrice)
 
     return (
         <div className="basket__container">
@@ -21,7 +22,7 @@ function BasketCard() {
             </ul>
             <div className="basket__footer">
                 <div className="basket__footer__sum">
-                    Сумма замовлення:<span>грн</span>
+                    Сумма замовлення:<span>{total} грн</span>
                 </div>
                 <div className="basket__footer__checkout">
                     <Link to="/checkout">

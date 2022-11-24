@@ -1,9 +1,14 @@
 import './Items.scss'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../../Redux/slice/cartSlice'
+import { addToCart, recountTotalValues } from '../../Redux/slice/cartSlice'
 
 export default function Item({ data, title, id }) {
     const dispatch = useDispatch()
+
+    const handelClick = (item) => {
+        dispatch(addToCart(item))
+        dispatch(recountTotalValues())
+    }
 
     return (
         <section className="item__wrapper">
@@ -23,7 +28,7 @@ export default function Item({ data, title, id }) {
                                       <button
                                           className="btn"
                                           style={{ width: '125px', height: '35px' }}
-                                          onClick={() => dispatch(addToCart(item))}
+                                          onClick={() => handelClick(item)}
                                       >
                                           В кошик
                                       </button>
