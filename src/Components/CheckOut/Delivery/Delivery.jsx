@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 
 export default function Delivery() {
-    const user = useSelector((state) => state.user)
+    const user = useSelector((state) => state.persistedReducer.user)
     const [name, setName] = useState(user.name ? user.name : '')
     const [phone, setPhone] = useState(user.phone ? user.phone : '')
     const [address, setAddress] = useState('')

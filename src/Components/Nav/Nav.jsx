@@ -1,21 +1,31 @@
 import './Nav.scss'
 import Btn from '../Btn/Btn'
 import UpBtn from './UpBtn/UpBtn'
+import BasketBtn from './BasketBtn/BasketBtn'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import {useAuth} from '../../hooks/use-auth'
+import { useAuth } from '../../hooks/use-auth'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-
-
+import { doc, getDoc } from "firebase/firestore";
+import db from '../../services/firebaseConfig'
 
 export default function Nav() {
 
-    const totalItems = useSelector((state)=> state.cart.totalItems)
+    const user = useSelector((state) => state.persistedReducer.user)
+
+    async function handlerTest() {
+        const docSnap = await getDoc(doc(db, "users", user.email));
+            let temp = docSnap.data()
+            console.log("Document data:", temp);
+    }
+
+
+    const totalItems = useSelector((state) => state.persistedReducer.cart.totalItems)
 
     const [scroll, setScroll] = useState(0)
-    const {isAuth, email} = useAuth();
+    const { isAuth, email } = useAuth()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -78,13 +88,13 @@ export default function Nav() {
                     </ul>
 
                     <div className="nav__btn__wrapper">
-                        
+                        <p onClick={handlerTest}>test</p>
                         <p className="nav__btn__login">
-                            {isAuth ? 
-                            <RouterLink to="/profile">Особитий кабінет</RouterLink>
-                            :
-                            <RouterLink to="/login"> Вхід</RouterLink>
-                            }
+                            {isAuth ? (
+                                <RouterLink to="/profile">Особитий кабінет</RouterLink>
+                            ) : (
+                                <RouterLink to="/login"> Вхід</RouterLink>
+                            )}
                         </p>
                         <RouterLink to="/basket">
                             <Btn url="basket" btnText={`В кошик | ${totalItems}`} />
@@ -94,6 +104,10 @@ export default function Nav() {
                 <Link activeClass="active" to="logo" smooth={true} offset={-70} duration={500}>
                     {scroll > document.documentElement.clientHeight && <UpBtn />}
                 </Link>
+                <RouterLink to="/basket">
+                            {scroll > document.documentElement.clientHeight && <BasketBtn url="basket" total={totalItems}/>}
+                        </RouterLink>
+                
             </nav>
         </div>
     )

@@ -18,7 +18,6 @@ const cartSlice = createSlice({
     recountTotalValues(state) {
       state.totalPrice = state.cart.reduce((sum, obj) => obj.price * obj.quantity + sum, 0);
       state.totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
-      console.log(state.cart)
     },
     addToCart: (state, action) => {
       const itemInCart = state.cart.find(

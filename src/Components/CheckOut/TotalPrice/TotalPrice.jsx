@@ -2,8 +2,8 @@ import './TotalPrice.scss'
 import { useSelector } from 'react-redux'
 
 export default function TotalPrice() {
-    let cart = useSelector((state) => state.cart.cart)
-    let total = useSelector((state) => state.cart.totalPrice)
+    let cart = useSelector((state) => state.persistedReducer.cart.cart)
+    let total = useSelector((state) => state.persistedReducer.cart.totalPrice)
 
     return (
         <div className="total">
@@ -17,6 +17,7 @@ export default function TotalPrice() {
                         <h3>{item.name}</h3>
                         <span>{item.description}</span>
                     </div>
+                    <span>{item.quantity} шт </span>
                     <span>{item.price} ₴</span>
                 </li>
 )

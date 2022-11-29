@@ -7,9 +7,13 @@ import { Link } from 'react-router-dom'
 import { setUser } from '../../Redux/slice/userSlice'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { doc, updateDoc } from 'firebase/firestore'
+import db from '../../services/firebaseConfig'
+
 
 export default function ProfileForm() {
-    const user = useSelector((state) => state.user)
+    const user = useSelector((state) => state.persistedReducer.user)
+    const cart = useSelector((state)=> state.persistedReducer.cart.cart)
     const dispatch = useDispatch()
     const [inputName, setInputName] = useState(user.name ? user.name : '')
     const [inputNumber, setInputNumber] = useState(user.phone ? user.phone : '')
@@ -19,14 +23,15 @@ export default function ProfileForm() {
         dispatch(removeUser())
     }
 
-    const handleSave = (inputName, inputNumber, inputEmail ) => {
-        dispatch(setUser({
-            email: inputEmail,
-            name : inputName,
-            phone : inputNumber,
-            id: user.id,
-            token: user.token,
-        }))
+    async function handleSave(inputName, inputNumber, inputEmail, cart) {
+        try {
+            await updateDoc(doc(db, 'users', inputEmail), {
+                name: inputName,
+                phone: inputNumber,
+            })
+        } catch (e) {
+            console.error('Error adding document: ', e)
+        }
     }
 
     return (
@@ -52,14 +57,21 @@ export default function ProfileForm() {
                     name="number"
                 />
                 <label htmlFor="email"> Ваш e-mail </label>
-                <input id="email" value={inputEmail} onChange={(e) => setInputEmail(e.target.value)} required disabled={true} type="email" name="email" />
+                <input
+                    id="email"
+                    value={inputEmail}
+                    onChange={(e) => setInputEmail(e.target.value)}
+                    required
+                    disabled={true}
+                    type="email"
+                    name="email"
+                />
 
-
-                <div onChange={(e)=> e.preventDefault()} className="profile__btn">
-                    <Btn onclick={()=> handleSave(inputName, inputNumber, inputEmail)} btnText="Зберегти" />
+                <div onChange={(e) => e.preventDefault()} className="profile__btn">
+                    <Btn handelClick={() => handleSave(inputName, inputNumber, inputEmail, cart)} btnText="Зберегти" />
 
                     <Link to="/">
-                        <Btn btnText="Вийти" onclick={(event) => handlerClick(event)} />
+                        <Btn btnText="Вийти" handelClick={(event) => handlerClick(event)} />
                     </Link>
                 </div>
             </div>

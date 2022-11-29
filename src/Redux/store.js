@@ -16,8 +16,6 @@ import {
 } from 'redux-persist'
 
 const rootReducer = combineReducers({
-        menu: productReducer,
-        stock: stockReducer,
         cart: cartReducer,
         user: userReducer,
 });
@@ -30,7 +28,10 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-    reducer: persistedReducer,
+    reducer: {persistedReducer,
+        menu: productReducer,
+        stock: stockReducer,
+    },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {

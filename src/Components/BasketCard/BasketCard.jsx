@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function BasketCard() {
-    let cart = useSelector((state) => state.cart.cart)
-    let total = useSelector((state) => state.cart.totalPrice)
+    let cart = useSelector((state) => state.persistedReducer.cart.cart)
+    let total = useSelector((state) => state.persistedReducer.cart.totalPrice)
 
     return (
         <div className="basket__container">
