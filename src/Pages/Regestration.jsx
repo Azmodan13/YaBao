@@ -4,7 +4,7 @@ import { setUser } from '../Redux/slice/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, setDoc, Timestamp } from 'firebase/firestore'
-import db from '../services/firebaseConfig'
+import {db} from '../services/firebaseConfig'
 
 
 export default function Registration() {

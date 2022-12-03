@@ -1,14 +1,36 @@
 import './Items.scss'
 import { useDispatch } from 'react-redux'
 import { addToCart, recountTotalValues } from '../../Redux/slice/cartSlice'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { doc, updateDoc } from 'firebase/firestore'
+import {db} from '../../services/firebaseConfig'
 
 export default function Item({ data, title, id }) {
     const dispatch = useDispatch()
+    const cart = useSelector((state) => state.persistedReducer.cart.cart)
+    const user = useSelector((state) => state.persistedReducer.user.email)
 
-    const handelClick = (item) => {
+    function handelClick(item) {
         dispatch(addToCart(item))
         dispatch(recountTotalValues())
     }
+
+    async function addToDb(user, cart) {
+        try {
+            await updateDoc(doc(db, 'users', user), {
+                items: cart,
+            })
+        } catch (e) {
+            console.error('Error adding document: ', e)
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            addToDb(user, cart)
+        }
+    }, [cart])
 
     return (
         <section className="item__wrapper">

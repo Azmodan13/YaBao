@@ -32,6 +32,11 @@ const cartSlice = createSlice({
         });
       }
     },
+    addToDb: (state, action) => {
+        state.cart.push({
+          ...action.payload,
+        });
+    },
     incrementQuantity: (state, action) => {
       const item = state.cart.find((item) => item.id === action.payload);
       item.quantity++;
@@ -50,6 +55,11 @@ const cartSlice = createSlice({
       );
       state.cart = removeItem;
     },
+    clearItem(state){
+      state.cart = [];
+      state.totalPrice = 0;
+      state.totalItems = 0;
+    },
   },
 });
 
@@ -60,5 +70,7 @@ export const {
   incrementQuantity,
   decrementQuantity,
   removeItem,
+  clearItem,
+  addToDb,
 } =
 cartSlice.actions;

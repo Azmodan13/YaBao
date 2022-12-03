@@ -6,27 +6,12 @@ import { Link, animateScroll as scroll } from 'react-scroll'
 import { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../../hooks/use-auth'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { doc, getDoc } from "firebase/firestore";
-import db from '../../services/firebaseConfig'
 
 export default function Nav() {
-
-    const user = useSelector((state) => state.persistedReducer.user)
-
-    async function handlerTest() {
-        const docSnap = await getDoc(doc(db, "users", user.email));
-            let temp = docSnap.data()
-            console.log("Document data:", temp);
-    }
-
-
     const totalItems = useSelector((state) => state.persistedReducer.cart.totalItems)
-
     const [scroll, setScroll] = useState(0)
-    const { isAuth, email } = useAuth()
-    const dispatch = useDispatch()
+    const { isAuth } = useAuth()
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -88,7 +73,6 @@ export default function Nav() {
                     </ul>
 
                     <div className="nav__btn__wrapper">
-                        <p onClick={handlerTest}>test</p>
                         <p className="nav__btn__login">
                             {isAuth ? (
                                 <RouterLink to="/profile">Особитий кабінет</RouterLink>
