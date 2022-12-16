@@ -17,8 +17,10 @@ export default function TotalPrice() {
                         <h3>{item.name}</h3>
                         <span>{item.description}</span>
                     </div>
+                    <div className='total__item__price'>
                     <span>{item.quantity} шт </span>
                     <span>{item.price} ₴</span>
+                    </div>
                 </li>
 )
                 }) : <div>err</div> }

@@ -1,55 +1,55 @@
 import './Form.scss'
-import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { emailValidationRules, passwordValidationRules } from '../../utils/ValidationRules'
 
-export default function Form({ title, submit, footer, link, handelClick, error }) {
+export default function Form({ submit, handleClick, error, register, errors }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const cart = useSelector((state)=> state.persistedReducer.cart.cart)
+
+
 
     function onsubmit(e) {
         e.preventDefault()
     }
 
     return (
-        <div className="container">
-            <div className="overlay">
-                <div className="modal__login">
-                    <h1 className="modal__login__title">{title}</h1>
-                    <form onSubmit={onsubmit}>
-                        <label htmlFor="email"> Ваш e-mail </label>
-                        <input
-                            id="email"
-                            required
-                            type="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <label htmlFor="password"> Ваш пароль </label>
-                        <input
-                            id="password"
-                            required
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {error ? <p className="error">Невірний email або пароль</p> : ''}
-                        <button
-                            className="btn"
-                            onClick={() => handelClick(email, password,cart)}
-                            style={{ width: '225px', height: '55px' }}
-                        >
-                            {submit}
-                        </button>
-                    </form>
-                    <p className="link">
-                        <Link to={link}>{footer}</Link>
-                    </p>
-                </div>
-            </div>
-        </div>
+        <form onSubmit={onsubmit}>
+            <label htmlFor="email">
+                Ваш e-mail
+                <input
+                    {...register('email', emailValidationRules)}
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="E-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                {errors?.email && <span className="errors">{errors?.email?.message || 'Помилка.'}</span>}
+            </label>
+
+            <label htmlFor="password">
+                Ваш пароль
+                <input
+                    {...register('password', passwordValidationRules)}
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Пароль"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {errors?.password && <span className="errors">{errors?.password?.message || 'Помилка.'}</span>}
+            </label>
+
+            {error ? <p className="error">Невірний email або пароль</p> : ''}
+            <button
+                className="btn"
+                onClick={() => handleClick(email, password)}
+                style={{ width: '225px', height: '55px' }}
+            >
+                {submit}
+            </button>
+        </form>
     )
 }

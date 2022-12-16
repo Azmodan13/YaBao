@@ -18,4 +18,9 @@
     &:hover {
         transform: scale(1.05);
     }
+    &:active{
+        transform: scale(1);
+        background-color: #7b142f;
+
+    }
 }

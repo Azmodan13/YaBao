@@ -26,7 +26,7 @@ const stockSlice = createSlice({
         },
         [fetchStock.fulfilled]: (state, action) => {
             state.status = 'resolved';
-            state.stock = action.payload;
+            state.stock = action.payload[0];
         },
         [fetchStock.rejected]: (state, action) => {},
     }
@@ -34,3 +34,4 @@ const stockSlice = createSlice({
 
 
 export const stockReducer = stockSlice.reducer
+

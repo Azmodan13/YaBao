@@ -5,10 +5,17 @@ import {
 
 export const fetchProduct = createAsyncThunk(
     'product/fetchProduct',
-    async function () {
-        const response = await fetch('https://632fd006f5fda801f8d6918a.mockapi.io/menu')
-        const data = response.json();
-        return data
+    async function (_, rejectedWithValue) {
+        try {
+            const response = await fetch('https://632fd006f5fda801f8d6918a.mockapi.io/menu')
+            if (!response.ok){
+                throw new Error('Server Error!')
+            }
+            const data = response.json();
+            return data
+        } catch (error) {
+            return rejectedWithValue(error.massage)
+        }
     }
 )
 
@@ -26,9 +33,12 @@ const productSlice = createSlice({
         },
         [fetchProduct.fulfilled]: (state, action) => {
             state.status = 'resolved';
-            state.menu = action.payload;
+            state.menu = action.payload[0];
         },
-        [fetchProduct.rejected]: (state, action) => {},
+        [fetchProduct.rejected]: (state, action) => {
+            state.status = 'rejected';
+            state.error = action.payload;
+        },
     }
 })
 

@@ -1,17 +1,14 @@
 import './ProfileForm.scss'
 import Btn from '../Btn/Btn'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect, useRef } from 'react'
-import { removeUser } from '../../Redux/slice/userSlice'
+import { removeUser, setUser } from '../../Redux/slice/userSlice'
 import { clearItem } from '../../Redux/slice/cartSlice'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { doc, updateDoc } from 'firebase/firestore'
-import { db } from '../../services/firebaseConfig'
-import { storage } from '../../services/firebaseConfig'
+import { db, storage } from '../../services/firebaseConfig'
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
 import ava from '../../Assets/ico/social/ava.png'
-import { setUser } from '../../Redux/slice/userSlice'
 
 export default function ProfileForm() {
     const user = useSelector((state) => state.persistedReducer.user)
@@ -19,6 +16,7 @@ export default function ProfileForm() {
     const [inputName, setInputName] = useState(user.name ? user.name : '')
     const [inputNumber, setInputNumber] = useState(user.phone ? user.phone : '')
     const [inputEmail, setInputEmail] = useState(user.email ? user.email : '')
+    const [updateData, setUpdateData] = useState(false)
 
     const filePicker = useRef(null)
 
@@ -30,10 +28,9 @@ export default function ProfileForm() {
         if (imageUpload == null) return
         const imageRef = ref(storage, `${inputEmail}/avatar`)
         uploadBytes(imageRef, imageUpload).then((snaphsot) => {
-            getDownloadURL(snaphsot.ref).then((url)=> {
+            getDownloadURL(snaphsot.ref).then((url) => {
                 setImageList((prev) => [...prev, url])
             })
-            
         })
     }
 
@@ -45,7 +42,9 @@ export default function ProfileForm() {
                 })
             })
         })
-        if(imageUpload !== null){uploadImage()}
+        if (imageUpload !== null) {
+            uploadImage()
+        }
     }, [imageUpload])
 
     const handlerClick = (event) => {
@@ -54,37 +53,36 @@ export default function ProfileForm() {
     }
 
     async function handleSave(inputName, inputNumber, inputEmail) {
-        console.log('click',inputName ,inputEmail,inputNumber)
         try {
             await updateDoc(doc(db, 'users', inputEmail), {
                 name: inputName,
                 phone: inputNumber,
             })
+            setUpdateData(true)
         } catch (e) {
             console.error('Error adding document: ', e)
         }
-        dispatch(setUser({
-            email: user.email,
-            id: user.uid,
-            token: user.accessToken,
-            name: inputName,
-            phone: inputNumber,
-        }));
+        dispatch(
+            setUser({
+                email: user.email,
+                id: user.uid,
+                token: user.accessToken,
+                name: inputName,
+                phone: inputNumber,
+            }),
+        )
     }
 
     const handlePick = () => {
         filePicker.current.click()
     }
-    function onsubmit(e) {
-        e.preventDefault()
-    }
 
     return (
         <div className="profile">
             <h1 className="profile__title">Особисті данні</h1>
-            <div  className="profile__form">
+            <div className="profile__form">
                 <div className="profile__img" style={{ background: `url(${ava}) center` }}>
-                    {imagelist ? <img src={imagelist} /> : ''}
+                    {imagelist && <img src={imagelist} alt="avatar" />}
                 </div>
                 <input
                     id="hidden"
@@ -111,7 +109,7 @@ export default function ProfileForm() {
                     value={inputNumber}
                     onChange={(e) => setInputNumber(e.target.value)}
                     required
-                    type="number"
+                    type="tel"
                     name="number"
                 />
                 <label htmlFor="email"> Ваш e-mail </label>
@@ -125,13 +123,14 @@ export default function ProfileForm() {
                     name="email"
                 />
 
-                <div  className="profile__btn">
+                <div className="profile__btn">
                     <Btn handelClick={() => handleSave(inputName, inputNumber, inputEmail)} btnText="Зберегти" />
 
                     <Link to="/">
                         <Btn btnText="Вийти" handelClick={(event) => handlerClick(event)} />
                     </Link>
                 </div>
+                {updateData && <span className="save"> Данні збережено</span>}
             </div>
         </div>
     )

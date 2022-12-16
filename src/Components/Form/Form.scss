@@ -39,7 +39,7 @@
         border-radius: 8px;
         width: 255px;
         height: 48px;
-        margin-bottom: 25px;
+        margin-bottom: 10px;
         padding-left: 10px;
 
     }
@@ -81,6 +81,12 @@
             color: #FF2E65;
         }
     }
+
+.errors{
+    color: #ff2e65;
+    font-size: 15px;
+    line-height: 20px;
+}
 
 
 // body {

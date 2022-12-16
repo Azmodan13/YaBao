@@ -7,12 +7,13 @@ import { useSelector } from 'react-redux'
 function BasketCard() {
     let cart = useSelector((state) => state.persistedReducer.cart.cart)
     let total = useSelector((state) => state.persistedReducer.cart.totalPrice)
+    console.log(cart)
 
     return (
         <div className="basket__container">
             <h1 className="basket__title"> Кошик</h1>
             <ul className="basket__list">
-                {cart ? (
+                {cart.length ? (
                     cart.map((item) => <BasketItem key={item.id} item={item} />)
                 ) : (
                     <div className="err">
