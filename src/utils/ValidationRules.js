@@ -57,7 +57,15 @@ export const cviValidationRules = {
 export const cartValidationRules = {
     required: 'Поле обовязкове для заповнення',
     pattern: {
-        value: /^[0-9]{24}$/i,
-        message: 'Введіть 24 цифи',
+        value: /^[0-9]{16}$/i,
+        message: 'Введіть 16 цифи',
     },
 }
+
+// export const dataValidationRules = {
+//     required: 'Поле обовязкове для заповнення',
+//     pattern: {
+//         value: /^[0-9]{4}$/i,
+//         message: 'Введіть 4 цифи',
+//     },
+// }

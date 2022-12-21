@@ -2,25 +2,31 @@ import './Pay.scss'
 import visa from '../../Assets/ico/pay/visa.png'
 import pay from '../../Assets/ico/pay/pay.png'
 import master from '../../Assets/ico/pay/master.png'
-import { cartValidationRules, cviValidationRules } from '../../utils/ValidationRules'
+import { useState } from 'react'
+import { useCreditCardValidator } from 'react-creditcard-validator'
 
 export function Pay({ register, errors }) {
+    const [cartNumber, setCartNumber] = useState('')
+    const [cartData, setCartData] = useState('')
+    const [cartCVC, setCartCVC] = useState('')
+    const {
+        getCardNumberProps,
+        getExpiryDateProps,
+        getCVCProps,
+        meta: { erroredInputs },
+    } = useCreditCardValidator()
+
     return (
         <div className="pay__cart">
             <div className="pay__inputs">
-                {errors?.cartNumber && <span className="errors">{errors?.cartNumber?.message || 'Помилка.'}</span>}
+                <input required  {...getCardNumberProps({ onChange: (e) => setCartNumber(e.target.value) })} />
+                <p>{erroredInputs.cardNumber && erroredInputs.cardNumber}</p>
 
-                <input
-                    {...register('cartNumber', cartValidationRules)}
-                    type="nubmer"
-                    name="cartNumber"
-                    placeholder="Введіть номер карти"
-                />
-                <div className="pay__inputs__small">
-                    <input {...register('data')} placeholder="01/01" type="data" name="data" />
-                    <input {...register('cvi',cviValidationRules)} type="nubmer" name="cvi" placeholder="cvi" />
-                    {errors?.cvi && <span className="errors">{errors?.cvi?.message || 'Помилка.'}</span>}
-                </div>
+                <input  required {...getExpiryDateProps({ onChange: (e) => setCartData(e.target.value) })} />
+                <p>{erroredInputs.expiryDate && erroredInputs.expiryDate}</p>
+
+                <input required {...getCVCProps({ onChange: (e) => setCartCVC(e.target.value) })} />
+                <p>{erroredInputs.cvc && erroredInputs.cvc}</p>
             </div>
             <div className="pay__info">
                 <img src={visa} alt="visa" />
